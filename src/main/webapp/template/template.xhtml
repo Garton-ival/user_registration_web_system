@@ -1,39 +1,240 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <style type="text/css">
+<h:head>
+    <title>User management system</title>
+    <style type="text/css">
+        /* style.css */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .sidebar {
+            width: 175px;
+            background-color: indigo;
+            color: white;
+            padding: 20px;
+            height: 110vh;
+            box-shadow: 0 4px 6px rgba(0, 0.2, .4, 0.5), 0 1px 3px rgba(0, 0.3, 0.1, 0.08);
+        }
 
-            .center {
-                text-align: center;
-            }
-            .flexDisplay{
-                display: flex;
-                color: grey;
-                background-color: darkblue;
-                box-shadow: 5px -5px 10px 5px rgba(1, 1, 1, 1);
-                padding-bottom: 25px ;
-                border-radius: 10px ;
-            }
-            .autoMargin{
-                margin: auto;
-            }
-            .list{
-                text-decoration: none;
-                color : white;
-                margin-right: 300px;
-                margin: auto;
-            }
-        </style>
-    </h:head>
-    <h:body>
+        .sidebar img {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #F5F5DC;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px;
+        }
+
+        .card-grid {
+            width: 100%;
+        }
+
+        .card {
+            width: 65%;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .charts {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .charts .ui-chart {
+            width: 48%;
+        }
+        .logo{
+            width: 40px;
+            height: 40px;
+
+        }
+
+          .center {
+              text-align: center;
+          }
+        .flexDisplay{
+            display: flex;
+            color:grey;
+            background-color: whitesmoke;
+            padding-bottom: 25px ;
+            padding-top: 25px;
+            border-radius: 10px ;
+        }
+        .autoMargin{
+            margin: auto;
+            color: dimgrey ;
+        }
+        .list{
+            text-decoration: none;
+            color : white;
+            margin-right: 300px;
+            margin: auto;
+        }
+        .ui-datatable-scrollable-body {
+            max-height: 400px;
+        }
+        .ui-datatable-scrollable-body table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .ui-datatable-scrollable-body th, .ui-datatable-scrollable-body td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .ui-datatable-scrollable-body tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .ui-datatable-scrollable-body tr:hover {
+            background-color: #ddd;
+        }
+
+        .ui-datatable-scrollable-body th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+        .ui-datatable-scrollable-body table {
+            border-collapse: collapse;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .ui-datatable-scrollable-body th, .ui-datatable-scrollable-body td {
+            padding: 12px 15px;
+        }
+
+        .ui-datatable-scrollable-body th {
+            background-color: #009688;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .ui-datatable-scrollable-body tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .ui-datatable-scrollable-body tr:hover {
+            background-color: #d1d1d1;
+        }
+
+        .ui-datatable-scrollable-body td {
+            border-bottom: 1px solid #ddd;
+        }
+        .ui-datatable-scrollable-body .ui-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 10px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s;
+        }
+
+        .ui-datatable-scrollable-body .ui-button:hover {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+        }
+
+        .ui-datatable-scrollable-body .delete-button {
+            color: red;
+        }
+
+        .ui-datatable-scrollable-body .sdelete-button {
+            color: orangered;
+        }
+
+        .ui-datatable-scrollable-body .update-button {
+            color: green;
+            background-color: white;
+            border: 1px solid green;
+            border-radius: 4px;
+            padding: 6px 12px;
+        }
+
+        .ui-datatable-scrollable-body .update-button:hover {
+            background-color: green;
+            color: white;
+        }
+
+
+    </style>
+</h:head>
+<h:body>
+    <div class="sidebar">
+
+        <ui:fragment rendered="#{saveuserbean.isAdmin()}">
+            <ul>
+                <li><h:link value="Dashboard" outcome="/pages/protected/home/home.xhtml" /></li>
+                <li><h:link value="Users" outcome="/pages/protected/users/users.xhtml" /></li>
+                <li><h:link value="Dependants" outcome="/pages/protected/dependants/dependants_all.xhtml" /></li>
+                <li><h:link value="User registration" outcome="/pages/protected/users/register.xhtml" /></li>
+                <li><h:link value="Settings" outcome="/pages/protected/users/user_details.xhtml?name=#{saveuserbean.getCurrentUserName()}" /></li>
+                <h:form>
+                    <li><h:commandLink value="Log out"  action = "#{loginbean.logout()}" /></li>
+                </h:form>
+            </ul>
+        </ui:fragment>
+        <ui:fragment rendered="#{not saveuserbean.isAdmin()}">
+            <ul>
+                <li><h:link value="Dashboard" outcome="/pages/protected/home/home.xhtml" /></li>
+                <li><h:link value="Dependants" outcome="/pages/protected/dependants/dependants.xhtml?id=#{saveuserbean.getCurrentId()}" /></li>
+                <li><h:link value="Dependant registration" outcome="/pages/protected/dependants/register.xhtml?id=#{saveuserbean.getCurrentId()}" /></li>
+                <li><h:link value="Settings" outcome="/pages/protected/users/user_details.xhtml?name=#{saveuserbean.getCurrentUserName()}" /></li>
+                <h:form>
+                    <li><h:commandLink value="Log out"  action = "#{loginbean.logout()}" /></li>
+                </h:form>
+            </ul>
+        </ui:fragment>
+
+    </div>
+    <div class="content">
         <div class="flexDisplay">
             <ui:insert name="content"/>
         </div>
-    </h:body>
+    </div>
+</h:body>
 </html>

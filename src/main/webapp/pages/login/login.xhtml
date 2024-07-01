@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template2/template.xhtml">
+    <ui:define name="content">
+        <h:form class="autoMargin" style="max-width: 600px;">
+            <p:panel header="Log in" style="background-color: mintcream; border: 2px solid #000; border-radius: 50px; padding: 20px;" styleClass="login-panel">
+                <p:messages id="messages" autoUpdate="true" closable="true" />
+                <p:panelGrid columns="2" style="margin-bottom: 20px;" columnClasses="label, value">
+                    <h:outputLabel for="username" value="Username:" style="font-weight: bold; color: #333;" />
+                    <p:inputText id="username" value="#{loginbean.username}" required="true" label="Username" style="width: 80%; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" />
+                    <h:outputLabel for="password" value="Password:" style="font-weight: bold; color: #333;" />
+                    <p:password id="password" value="#{loginbean.password}" required="true" label="Password" style="width: 80%; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" />
+                </p:panelGrid>
+                <p:commandButton value="Log in" action="#{loginbean.login(loginbean.username,loginbean.password)}" ajax="false" styleClass="ui-button-primary" style="width: 50%; background-color: darkorange; color: white; font-weight: bold; border: none; padding: 5px; border-radius: 2px;" />
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
